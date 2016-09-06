@@ -16,3 +16,6 @@ build_dist
 # logs
 npm-debug.log
 npm-debug*.log
+
+# distro
+dist
