@@ -3,29 +3,65 @@ var connect = require('gulp-connect')
 var less = require('gulp-less')
 var webpack = require('webpack-stream')
 
-gulp.task('connect', ['copy'], function () {
+const paths = {
+  styles: {
+    src: './app/styles/main.less',
+    dest: './dist/styles'
+  },
+  scripts: {
+    src: './app/js/main.ts',
+    dest: './dist/js',
+    glob: './app/**/*.ts'
+  }
+}
+
+function server (done) {
   connect.server({
-    root: ['./build'],
+    root: 'dist',
+    livereload: true,
     port: 3001
   })
-})
 
-gulp.task('scripts', function () {
-  return gulp.src('./app/js/main.ts')
+  done()
+}
+
+function styles () {
+  return gulp.src(paths.styles.src)
+    .pipe(less())
+    .pipe(gulp.dest(paths.styles.dest))
+    .pipe(connect.reload())
+}
+
+function scripts () {
+  return gulp.src(paths.scripts.src)
     .pipe(webpack(require('./webpack.config.js')))
-    .pipe(gulp.dest('./build'))
-})
+    .pipe(gulp.dest(paths.scripts.dest))
+    .pipe(connect.reload())
+}
 
-gulp.task('copy', function () {
-  return gulp.src(['./app/**/**.*', '!./app/**/**.ts'], {
-    base: './src'
+function copy () {
+  return gulp.src(['./app/**/**.*', '!./app/**/**.ts', '!./app/**/**.less'], {
+    base: './app'
   })
-    .pipe(gulp.dest('./build'))
-})
+    .pipe(gulp.dest('./dist'))
+    .pipe(connect.reload())
+}
 
-gulp.task('build', ['scripts', 'copy'])
+function watch (done) {
+  gulp.watch(paths.scripts.glob, scripts)
+  gulp.watch(paths.styles.src, styles)
+  gulp.watch(['./app/**/**.*', '!./app/**/*.ts', '!./app/**/*.less'], copy)
 
-gulp.task('default', ['scripts', 'copy', 'connect'], function () {
-  gulp.watch(['!./app/**/**.ts', './src/**/**.*'], ['copy'])
-  gulp.watch('./src/**/**.ts', ['scripts'])
-})
+  done()
+}
+
+exports.server = server
+exports.styles = styles
+exports.scripts = scripts
+exports.copy = copy
+exports.watch = watch
+
+const build = gulp.parallel([scripts, styles, copy])
+
+gulp.task('build', build)
+gulp.task('default', gulp.series(build, watch, server))

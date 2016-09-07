@@ -1,9 +1,9 @@
+var path = require('path')
+
 module.exports = {
   entry: './app/js/main.ts',
-  watch: true,
   output: {
-    path: './dist/js',
-    publicPath: 'dist',
+    path: path.resolve('./dist/js'),
     filename: 'bundle.js'
   },
   module: {
