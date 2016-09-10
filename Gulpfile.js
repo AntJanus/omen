@@ -9,7 +9,7 @@ const paths = {
     dest: './dist/styles'
   },
   scripts: {
-    src: './app/js/main.ts',
+    src: './app/scripts/main.ts',
     dest: './dist/js',
     glob: './app/**/*.ts'
   }

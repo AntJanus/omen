@@ -5,6 +5,7 @@
 # modules
 node_modules
 bower_components
+typings
 
 # basic tmp
 tmp

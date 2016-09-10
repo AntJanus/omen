@@ -1,10 +1,15 @@
 var path = require('path')
 
 module.exports = {
-  entry: './app/js/main.ts',
+  entry: './app/scripts/main.ts',
   output: {
     path: path.resolve('./dist/js'),
     filename: 'bundle.js'
+  },
+  resolve: {
+    modulesDirectories: ['node_modules'],
+    root: './src',
+    extensions: ['', '.webpack.js', '.web.js', '.ts', '.js']
   },
   module: {
     loaders: [
