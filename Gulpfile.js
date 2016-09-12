@@ -6,7 +6,8 @@ var webpack = require('webpack-stream')
 const paths = {
   styles: {
     src: './app/styles/main.less',
-    dest: './dist/styles'
+    dest: './dist/styles',
+    glob: './app/**/*.less'
   },
   scripts: {
     src: './app/scripts/main.ts',
@@ -49,7 +50,7 @@ function copy () {
 
 function watch (done) {
   gulp.watch(paths.scripts.glob, scripts)
-  gulp.watch(paths.styles.src, styles)
+  gulp.watch(paths.styles.glob, styles)
   gulp.watch(['./app/**/**.*', '!./app/**/*.ts', '!./app/**/*.less'], copy)
 
   done()
