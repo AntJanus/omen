@@ -4,7 +4,8 @@
   "description": "Desktop markdown editor meant for heavy-duty writing",
   "main": "main.js",
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "watch": "gulp"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,7 @@
     "@angular/upgrade": "^2.0.0-rc.6",
     "core-js": "^2.4.1",
     "electron": "^1.3.5",
+    "font-awesome": "4.6.3",
     "reflect-metadata": "^0.1.8",
     "rxjs": "^5.0.0-beta.12",
     "systemjs": "^0.19.38",
