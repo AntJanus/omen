@@ -17,7 +17,7 @@ const FILES: File[] = [
   template: `
     <div class="flex-container container">
       <div class="sidebar">
-        <input class="input-block" type="text" placeholder="Search" />
+        <input class="input-block input-transparent input-search" type="text" placeholder="Search" />
         <hr />
         <div class="file-listing">
           <ul class="list-plain">
@@ -26,6 +26,10 @@ const FILES: File[] = [
                 [class.fa-file-text-o]="file === selectedFile"
                 [class.fa-file-text]="file !== selectedFile"
                 ></span> {{file.title}}
+            </li>
+            <li>
+              <input class="input-block input-transparent" type="text" placeholder="new file" [(ngModel)]="newFile.title" />
+              <input type="submit" (click)="createFile(newFile)" />
             </li>
           </ul>
         </div>
@@ -39,8 +43,20 @@ const FILES: File[] = [
 export class AppComponent {
   files = FILES
   selectedFile: File
+  newFile: File = {
+    title: '',
+    content: ''
+  }
 
   onFileSelect(file: File): void {
     this.selectedFile = file
+  }
+
+  createFile(file: File): void {
+    this.files.push(file)
+    this.newFile = {
+      title: '',
+      content: ''
+    }
   }
 }
