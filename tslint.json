@@ -1,9 +1,7 @@
 {
     "rules": {
-      "requireInternalWithUnderscore": true,
-      "duplicateModuleImport": true,
-      "enforce-copyright-header": true,
       "no-duplicate-variable": true,
+      "semicolon": [false, "never"],
       "variable-name": [true, "ban-keywords"]
     }
 }

@@ -1,5 +1,5 @@
+require('core-js/shim')
 require('zone.js')
-import 'core-js/shim'
 
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
