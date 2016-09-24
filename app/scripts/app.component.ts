@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core'
+import { Component } from '@angular/core'
+import { select, NgRedux } from 'ng2-redux'
+import { Observable } from 'rxjs/Observable'
+
 import { IFile } from './store/file.reducer'
+import { IAppState } from './store'
 
 @Component({
   selector: 'my-app',
@@ -32,30 +36,16 @@ import { IFile } from './store/file.reducer'
     </div>
   `
 })
-export class AppComponent implements OnInit {
-  files: IFile[]
+export class AppComponent {
+  @select('files') files
+
   selectedFile: IFile
   newFile: IFile = {
     title: '',
     content: ''
   }
 
-  ngOnInit(): void {
-    this.files = [
-      {
-        title: 'File 1',
-        content: 'Content'
-      },
-      {
-        title: 'File 2',
-        content: 'Content'
-      },
-      {
-        title: 'File 3',
-        content: 'Content'
-      }
-    ]
-  }
+  constructor(private ngRedux: NgRedux<IAppState>) {}
 
   onFileSelect(file: IFile): void {
     this.selectedFile = file
