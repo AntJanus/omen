@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { File } from './file';
+import { Component, OnInit } from '@angular/core'
+import { IFile } from './store/file.reducer'
 
 @Component({
   selector: 'my-app',
@@ -33,9 +33,9 @@ import { File } from './file';
   `
 })
 export class AppComponent implements OnInit {
-  files: File[]
-  selectedFile: File
-  newFile: File = {
+  files: IFile[]
+  selectedFile: IFile
+  newFile: IFile = {
     title: '',
     content: ''
   }
@@ -57,11 +57,11 @@ export class AppComponent implements OnInit {
     ]
   }
 
-  onFileSelect(file: File): void {
+  onFileSelect(file: IFile): void {
     this.selectedFile = file
   }
 
-  onFileDelete(file: File): void {
+  onFileDelete(file: IFile): void {
     var idx = this.files.indexOf(file)
 
     if (idx > -1) {
@@ -69,7 +69,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  createFile(file: File): void {
+  createFile(file: IFile): void {
     this.files.push(file)
 
     this.newFile = {

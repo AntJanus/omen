@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { File } from '../file';
+import { Component, Input } from '@angular/core'
+import { IFile } from '../store/file.reducer'
 
 @Component({
   selector: 'content-editor',
@@ -19,5 +19,5 @@ import { File } from '../file';
 })
 export class ContentEditorComponent {
   @Input()
-  file: File
+  file: IFile
 }

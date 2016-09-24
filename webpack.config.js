@@ -2,6 +2,7 @@ var path = require('path')
 
 module.exports = {
   entry: './app/scripts/main.ts',
+  target: 'electron',
   output: {
     path: path.resolve('./dist/js'),
     filename: 'bundle.js'
