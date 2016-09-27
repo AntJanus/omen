@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms'
 
 import { NgReduxModule, NgRedux } from 'ng2-redux'
 import { IAppState, rootReducer } from './store'
+import { FileActions } from './actions/file.actions'
+
+import { IPCService } from './services/IPC.service'
 
 import { AppComponent } from './app.component'
 import { ContentEditorComponent } from './components/content-editor.component'
@@ -17,6 +20,10 @@ import { ContentEditorComponent } from './components/content-editor.component'
   declarations: [
     AppComponent,
     ContentEditorComponent
+  ],
+  providers: [
+    IPCService,
+    FileActions
   ],
   bootstrap: [ AppComponent ]
 })

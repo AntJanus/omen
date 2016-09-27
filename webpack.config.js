@@ -1,6 +1,7 @@
 var path = require('path')
 
 module.exports = {
+  sourceMap: true,
   entry: './app/scripts/main.ts',
   target: 'electron',
   output: {
@@ -8,7 +9,7 @@ module.exports = {
     filename: 'bundle.js'
   },
   resolve: {
-    modulesDirectories: ['node_modules'],
+    modules: [path.join(__dirname, 'node_modules')],
     root: './src',
     extensions: ['', '.webpack.js', '.web.js', '.ts', '.js']
   },

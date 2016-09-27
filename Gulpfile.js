@@ -1,5 +1,4 @@
 var gulp = require('gulp')
-var connect = require('gulp-connect')
 var less = require('gulp-less')
 var webpack = require('webpack-stream')
 
@@ -21,16 +20,6 @@ const paths = {
   }
 }
 
-function server (done) {
-  connect.server({
-    root: 'dist',
-    livereload: true,
-    port: 3001
-  })
-
-  done()
-}
-
 function fontCSS () {
   return gulp.src(paths.icons.src)
     .pipe(gulp.dest(paths.icons.dest + '/css'))
@@ -45,14 +34,12 @@ function styles () {
   return gulp.src(paths.styles.src)
     .pipe(less())
     .pipe(gulp.dest(paths.styles.dest))
-    .pipe(connect.reload())
 }
 
 function scripts () {
   return gulp.src(paths.scripts.src)
     .pipe(webpack(require('./webpack.config.js')))
     .pipe(gulp.dest(paths.scripts.dest))
-    .pipe(connect.reload())
 }
 
 function copy () {
@@ -60,7 +47,6 @@ function copy () {
     base: './app'
   })
     .pipe(gulp.dest('./dist'))
-    .pipe(connect.reload())
 }
 
 function watch (done) {
@@ -71,7 +57,6 @@ function watch (done) {
   done()
 }
 
-exports.server = server
 exports.styles = styles
 exports.scripts = scripts
 exports.fonts = fonts
@@ -82,4 +67,4 @@ exports.watch = watch
 const build = gulp.parallel([scripts, styles, copy, fonts, fontCSS])
 
 gulp.task('build', build)
-gulp.task('default', gulp.series(build, watch, server))
+gulp.task('default', gulp.series(build, watch))

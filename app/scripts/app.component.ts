@@ -1,8 +1,9 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { select, NgRedux } from 'ng2-redux'
 import { Observable } from 'rxjs/Observable'
 
 import { IFile } from './store/file.reducer'
+import { FileActions } from './actions/file.actions'
 import { IAppState } from './store'
 
 @Component({
@@ -16,7 +17,7 @@ import { IAppState } from './store'
           <ul class="list-plain">
             <li
               class="file-item"
-              *ngFor="let file of files"
+              *ngFor="let file of (files | async)"
               (click)="onFileSelect(file)">
               <span class="fa"
                 [class.fa-file-text-o]="file === selectedFile"
@@ -36,7 +37,7 @@ import { IAppState } from './store'
     </div>
   `
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   @select('files') files
 
   selectedFile: IFile
@@ -45,7 +46,11 @@ export class AppComponent {
     content: ''
   }
 
-  constructor(private ngRedux: NgRedux<IAppState>) {}
+  constructor(private ngRedux: NgRedux<IAppState>, private fileActions: FileActions) {}
+
+  ngOnInit() {
+    this.fileActions.getAllFiles()
+  }
 
   onFileSelect(file: IFile): void {
     this.selectedFile = file

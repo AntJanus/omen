@@ -14,7 +14,7 @@ export class FileActions {
 
   getAllFiles (): void {
     this.ngRedux.dispatch({
-      type: RECEIVE_ROOT_FILES,
+      type: FileActions.RECEIVE_ROOT_FILES,
       payload: {
         files: [
           {

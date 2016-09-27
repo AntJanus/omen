@@ -7,7 +7,9 @@ export interface IFile {
   content?: string
 }
 
-export function fileReducer (state: IFile[], action) {
+const defaultState: IFile[] = []
+
+export function fileReducer (state = defaultState, action) {
   switch (action.type) {
     case FileActions.RECEIVE_ROOT_FILES:
       return action.payload.files
