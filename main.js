@@ -1,5 +1,7 @@
 const {app, BrowserWindow} = require('electron')
 
+require('./main/routes')
+
 let win
 
 function createWindow () {

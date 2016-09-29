@@ -13,22 +13,15 @@ export class FileActions {
   static RECEIVE_ROOT_FILES: string = 'RECEIVE_ROOT_FILES'
 
   getAllFiles (): void {
-    this.ngRedux.dispatch({
-      type: FileActions.RECEIVE_ROOT_FILES,
-      payload: {
-        files: [
-          {
-            name: 'file-name.md',
-            title: 'File Name',
-            content: 'My file name'
-          },
-          {
-            name: 'file-2.md',
-            title: 'File 2',
-            content: 'My second file name'
-          }
-        ]
-      }
+    this.IPCService.sendMessage('files', '', (event, arg) => {
+      this.ngRedux.dispatch({
+        type: FileActions.RECEIVE_ROOT_FILES,
+        payload: {
+          files: arg.data
+        }
+      })
+
+      return true
     })
   }
 }
