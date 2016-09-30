@@ -4,15 +4,24 @@ export interface IFile {
   name?: string,
   title?: string,
   path?: string,
-  content?: string
+  content?: string,
+  isFile?: boolean
 }
 
-const defaultState: IFile[] = []
+const defaultState = {
+  files: []
+}
 
 export function fileReducer (state = defaultState, action) {
   switch (action.type) {
     case FileActions.RECEIVE_ROOT_FILES:
-      return action.payload.files
+      return Object.assign({}, state, {
+        files: action.payload.files
+      })
+    case FileActions.RECEIVE_CURRENT_FILE:
+      return Object.assign({}, state, {
+        currentFile: action.payload.data
+      })
     default:
       return state
   }

@@ -11,6 +11,7 @@ export class FileActions {
     private IPCService: IPCService) {}
 
   static RECEIVE_ROOT_FILES: string = 'RECEIVE_ROOT_FILES'
+  static RECEIVE_CURRENT_FILE: string = 'RECEIVE_CURRENT_FILE'
 
   getAllFiles (): void {
     this.IPCService.sendMessage('files', '', (event, arg) => {
@@ -22,6 +23,19 @@ export class FileActions {
       })
 
       return true
+    })
+  }
+
+  getCurrentFile (filePath: string): void {
+    this.IPCService.sendMessage('files/get', filePath, (event, arg) => {
+      if (arg.id === filePath) {
+        this.ngRedux.dispatch({
+          type: FileActions.RECEIVE_CURRENT_FILE,
+          payload: arg
+        })
+
+        return true
+      }
     })
   }
 }

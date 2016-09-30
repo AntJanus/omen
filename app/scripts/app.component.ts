@@ -17,12 +17,14 @@ import { IAppState } from './store'
           <ul class="list-plain">
             <li
               class="file-item"
-              *ngFor="let file of (files | async)"
-              (click)="onFileSelect(file)">
+              *ngFor="let item of (files | async)"
+              (click)="onItemSelect(item)">
               <span class="fa"
-                [class.fa-file-text-o]="file === selectedFile"
-                [class.fa-file-text]="file !== selectedFile"
-                ></span> {{file.title}} <span class="fa fa-trash file-delete error" (click)="onFileDelete(file)"></span>
+                [class.fa-file-text-o]="item === selectedItem && item.isFile"
+                [class.fa-file-text]="item !== selectedItem && item.isFile"
+                [class.fa-folder]="item !== selectedItem && !item.isFile"
+                [class.fa-folder-open-o]="item === selectedItem && !item.isFile"
+                ></span> {{item.title}} <span class="fa fa-trash file-delete error" (click)="onFileDelete(item)"></span>
             </li>
             <li>
               <input class="input-block input-transparent" type="text" placeholder="new file" [(ngModel)]="newFile.title" />
@@ -32,16 +34,19 @@ import { IAppState } from './store'
         </div>
       </div>
       <div class="flex-col">
-        <content-editor [file]="selectedFile"></content-editor>
+        {{ currentFile | async }}
+        <content-editor [file]="currentFile | async"></content-editor>
       </div>
     </div>
   `
 })
 export class AppComponent implements OnInit {
-  @select('files') files
+  @select(['files', 'files']) files
+  @select(['files', 'currentFile']) currentFile
 
-  selectedFile: IFile
+  selectedItem: IFile
   newFile: IFile = {
+    name: '',
     title: '',
     content: ''
   }
@@ -52,12 +57,15 @@ export class AppComponent implements OnInit {
     this.fileActions.getAllFiles()
   }
 
-  onFileSelect(file: IFile): void {
-    this.selectedFile = file
+  onItemSelect(item: IFile): void {
+    if (item.isFile) {
+      this.fileActions.getCurrentFile(item.name)
+      this.selectedItem = item
+    }
   }
 
-  onFileDelete(file: IFile): void {
-    var idx = this.files.indexOf(file)
+  onItemDelete(item: IFile): void {
+    var idx = this.files.indexOf(item)
 
     if (idx > -1) {
       this.files.splice(idx, 1)

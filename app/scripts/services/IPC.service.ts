@@ -24,7 +24,10 @@ export class IPCService {
   }
 
   addListener(channel: string, callback: any) {
-    ipcRenderer.on(channel, callback)
+    ipcRenderer.on(channel, (event, arg) => {
+      console.log(`IPC EVENT for ${channel}`, event, arg)
+      return callback(event, arg)
+    })
   }
 
   removeListener(channel, callback) {
