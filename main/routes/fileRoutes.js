@@ -4,7 +4,6 @@ const Promise = require('bluebird')
 const {ipcMain} = require('electron')
 
 Promise.promisifyAll(fs)
-Promise.promisifyAll(path)
 
 /*
   structure:
