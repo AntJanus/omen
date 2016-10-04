@@ -1,0 +1,5 @@
+machine:
+    node: 6.5.0
+
+test:
+    post: npm run semantic-release
