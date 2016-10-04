@@ -1,13 +1,13 @@
 {
-  "name": "omen",
+  "name": "open-markdown-environment-notebook",
   "description": "Desktop markdown editor meant for heavy-duty writing",
+  "version": "0.0.0",
   "main": "main.js",
   "scripts": {
     "build": "webpack",
     "watch": "gulp",
     "start": "electron .",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "release": "standard-version"
   },
   "repository": {
     "type": "git",
@@ -33,7 +33,6 @@
     "@angular/platform-browser-dynamic": "^2.0.0",
     "@angular/router": "^3.0.0",
     "@angular/upgrade": "^2.0.0",
-    "conventional-changelog": "1.1.0",
     "core-js": "^2.4.1",
     "electron": "1.4.0",
     "font-awesome": "4.6.3",
@@ -46,7 +45,6 @@
   "devDependencies": {
     "@types/core-js": "^0.9.34",
     "@types/node": "^6.0.41",
-    "condition-circle": "1.5.0",
     "del": "^2.2.2",
     "electron-prebuilt-compile": "1.4.1",
     "eslint-config-standard": "^6.0.0",
@@ -58,14 +56,11 @@
     "gulp-less": "^3.1.0",
     "gulp-livereload": "^3.8.1",
     "standard": "^8.0.0",
+    "standard-version": "2.4.0",
     "ts-loader": "^0.8.2",
     "tslint": "3.15.1",
     "typescript": "^2.0.3",
     "webpack": "^1.13.1",
-    "webpack-stream": "^3.2.0",
-    "semantic-release": "^4.3.5"
-  },
-  "release": {
-    "verifyConditions": "condition-circle"
+    "webpack-stream": "^3.2.0"
   }
 }

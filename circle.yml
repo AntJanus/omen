@@ -4,4 +4,6 @@ machine:
 
 test:
     post:
-        - npm run semantic-release
+        - git checkout master; git pull origin master
+        - npm run release
+        - git push --follow-tags origin master
