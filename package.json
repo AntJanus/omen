@@ -47,6 +47,7 @@
   "devDependencies": {
     "@types/core-js": "^0.9.34",
     "@types/node": "^6.0.41",
+    "condition-circle": "1.5.0",
     "del": "^2.2.2",
     "electron-prebuilt-compile": "1.4.1",
     "eslint-config-standard": "^6.0.0",
@@ -64,5 +65,8 @@
     "typescript": "^2.0.3",
     "webpack": "^1.13.1",
     "webpack-stream": "^3.2.0"
+  },
+  "release": {
+    "verifyConditions": "condition-circle"
   }
 }
