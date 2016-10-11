@@ -9,7 +9,7 @@ export function settingsReducer (state = defaultState, action) {
     case SettingsActions.SET_PATH:
     case SettingsActions.GET_PATH:
       return Object.assign({}, state, {
-        path: actions.payload.path
+        path: action.payload.path
       })
     default:
       return state

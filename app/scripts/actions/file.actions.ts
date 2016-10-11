@@ -4,6 +4,11 @@ import { IAppState } from '../store'
 
 import { IPCService } from '../services/IPC.service'
 
+interface IAction {
+  type: string,
+  payload: any
+}
+
 @Injectable()
 export class FileActions {
   constructor (
@@ -15,14 +20,18 @@ export class FileActions {
   static SAVING_CURRENT_FILE: string = 'SAVING_CURRENT_FILE'
   static SAVED_CURRENT_FILE: string = 'SAVED_CURRENT_FILE'
 
+  static receiveAllFiles (files: any): IAction {
+    return {
+      type: FileActions.RECEIVE_ROOT_FILES,
+      payload: {
+        files
+      }
+    }
+  }
+
   getAllFiles (): void {
     this.IPCService.sendMessage('files', '', (event, arg) => {
-      this.ngRedux.dispatch({
-        type: FileActions.RECEIVE_ROOT_FILES,
-        payload: {
-          files: arg.data
-        }
-      })
+      this.ngRedux.dispatch(FileActions.receiveAllFiles(arg.data))
 
       return true
     })

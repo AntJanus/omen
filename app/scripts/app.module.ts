@@ -13,6 +13,7 @@ import { IPCService } from './services/IPC.service'
 
 import { AppComponent } from './app.component'
 import { ContentEditorComponent } from './components/content-editor.component'
+import { FileListComponent } from './components/file-list.component'
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { ContentEditorComponent } from './components/content-editor.component'
   ],
   declarations: [
     AppComponent,
-    ContentEditorComponent
+    ContentEditorComponent,
+    FileListComponent
   ],
   providers: [
     IPCService,

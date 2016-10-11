@@ -1,0 +1,29 @@
+<div class="file-list-component">
+  <input class="input-block input-transparent input-search" type="text" placeholder="Search" />
+  <hr />
+  <div class="file-listing">
+    <ul class="list-plain">
+      <li
+        class="file-item"
+        *ngFor="let item of (files | async)"
+        (click)="onItemSelect(item)">
+        <span class="fa"
+          [class.fa-file-text-o]="item === selectedItem && item.isFile"
+          [class.fa-file-text]="item !== selectedItem && item.isFile"
+          [class.fa-folder]="item !== selectedItem && !item.isFile"
+          [class.fa-folder-open-o]="item === selectedItem && !item.isFile"
+          ></span> {{item.title}} <span class="fa fa-trash file-delete error" (click)="onFileDelete(item)"></span>
+      </li>
+      <li>
+        <input class="input-block input-transparent" type="text" placeholder="new file" [(ngModel)]="newFile.title" />
+        <input value="create" type="submit" (click)="createFile(newFile)" />
+      </li>
+    </ul>
+  </div>
+  <hr />
+  <div class="">
+    {{ projectPath | async }}
+    <input class="input-block input-transparent" type="text" placeholder="Project path" [(ngModel)]="newProjectPath" />
+    <input value="set" type="submit" (click)="setProjectPath(newProjectPath)" />
+  </div>
+</div>

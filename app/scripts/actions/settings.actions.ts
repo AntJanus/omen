@@ -11,7 +11,7 @@ export class SettingsActions {
   constructor (
     private ngRedux: NgRedux<IAppState>,
     private IPCService: IPCService,
-    private FileActions: fileActions) {}
+    private fileActions: FileActions) {}
 
   static SET_PATH: string = 'SET_PATH'
   static GET_PATH: string = 'GET_PATH'
@@ -39,6 +39,6 @@ export class SettingsActions {
           path: arg.path
         }
       })
-    }})
+    })
   }
 }

@@ -22,7 +22,7 @@ function getPath (event, arg) {
 function setPath (event, arg) {
   var p = arg.path
 
-  process.cwd(p)
+  process.chdir(p)
 
   event.sender.send('res:path/set', { ok: true })
 }
