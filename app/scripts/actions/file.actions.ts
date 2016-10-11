@@ -12,6 +12,8 @@ export class FileActions {
 
   static RECEIVE_ROOT_FILES: string = 'RECEIVE_ROOT_FILES'
   static RECEIVE_CURRENT_FILE: string = 'RECEIVE_CURRENT_FILE'
+  static SAVING_CURRENT_FILE: string = 'SAVING_CURRENT_FILE'
+  static SAVED_CURRENT_FILE: string = 'SAVED_CURRENT_FILE'
 
   getAllFiles (): void {
     this.IPCService.sendMessage('files', '', (event, arg) => {
@@ -35,6 +37,27 @@ export class FileActions {
         })
 
         return true
+      }
+    })
+  }
+
+  saveCurrentFile (filePath: string, content: string): void {
+    this.ngRedux.dispatch({
+      type: FileActions.SAVING_CURRENT_FILE,
+      payload: filePath
+    });
+
+    this.IPCService.sendMessage('file/edit', {
+      path: filePath,
+      content
+    }, (event, arg) => {
+      if (arg.id === filePath) {
+        this.ngRedux.dispatch({
+          type: FileActions.SAVED_CURRENT_FILE,
+          payload: {
+            content
+          }
+        })
       }
     })
   }

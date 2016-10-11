@@ -1,1 +1,2 @@
 require('./fileRoutes')
+require('./settingsRoutes')

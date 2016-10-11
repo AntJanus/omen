@@ -16,13 +16,13 @@ ipcMain.on('req:path', getPath)
 ipcMain.on('req:path/set', setPath)
 
 function getPath (event, arg) {
+  event.sender.send('res:path', { path: process.cwd() })
+}
+
+function setPath (event, arg) {
   var p = arg.path
 
   process.cwd(p)
 
-  event.sender.send('res:path', { ok: true })
-}
-
-function setPath (event, arg) {
   event.sender.send('res:path/set', { ok: true })
 }

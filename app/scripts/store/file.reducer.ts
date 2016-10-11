@@ -9,7 +9,9 @@ export interface IFile {
 }
 
 const defaultState = {
-  files: []
+  files: [],
+  currentFile: {},
+  savingCurrentFile: false
 }
 
 export function fileReducer (state = defaultState, action) {
@@ -21,6 +23,14 @@ export function fileReducer (state = defaultState, action) {
     case FileActions.RECEIVE_CURRENT_FILE:
       return Object.assign({}, state, {
         currentFile: action.payload.data
+      })
+    case FileActions.SAVING_CURRENT_FILE:
+      return Object.assign({}, state, {
+        savingCurrentFile: true
+      })
+    case FileActions.SAVED_CURRENT_FILE:
+      return Object.assign({}, state, {
+        savingCurrentFile: false
       })
     default:
       return state

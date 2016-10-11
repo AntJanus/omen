@@ -61,4 +61,10 @@ function getFile (event, arg) {
 }
 
 function editFile (event, arg) {
+  fs.writeFileAsync(path.join(process.cwd(), arg.path), arg.content)
+    .then(() => {
+      event.sender.send('res:files/edit', {
+        id: arg.path
+      })
+    })
 }
