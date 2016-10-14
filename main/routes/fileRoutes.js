@@ -53,6 +53,7 @@ function getFile (event, arg) {
         data: {
           name: arg,
           title: arg,
+          path: arg,
           content: file.toString(),
           isFile: fileStat.isFile()
         }

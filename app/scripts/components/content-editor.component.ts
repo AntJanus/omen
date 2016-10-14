@@ -1,27 +1,31 @@
 import { Component, Input } from '@angular/core'
 
 import { IFile } from '../store/file.reducer'
+import { FileActions } from '../actions/file.actions'
+import { IAppState } from '../store'
+
 
 @Component({
   selector: 'content-editor',
-  template: `
-    <div class="content">
-      <div *ngIf="!file || !file.title">
-        <h2 class="content-title">Welcome to OMEN</h2>
-        <h3>Please select file to edit</h3>
-      </div>
-      <div *ngIf="file && file.title">
-        <h2 class="content-title">
-          {{ file.title }}
-          <!-- <input class="input-block" type="text" [(ngModel)]="file.title" /> -->
-        </h2>
-        <hr />
-        <textarea>{{file.content}}</textarea>
-      </div>
-    </div>
-  `
+  templateUrl: 'scripts/components/content-editor.html'
 })
 export class ContentEditorComponent {
   @Input()
   file: IFile
+
+  editorConfig: any = {
+    mode: 'markdown',
+    lineWrapping: true,
+    autofocus: true
+  }
+
+  constructor(
+    private fileActions: FileActions
+  ) {
+    console.log(this.editorConfig);
+  }
+
+  saveFile(file) {
+    this.fileActions.saveCurrentFile(file.path, file.content)
+  }
 }

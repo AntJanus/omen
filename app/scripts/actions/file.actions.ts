@@ -51,12 +51,13 @@ export class FileActions {
   }
 
   saveCurrentFile (filePath: string, content: string): void {
+    console.log('WHOA', filePath, content)
     this.ngRedux.dispatch({
       type: FileActions.SAVING_CURRENT_FILE,
       payload: filePath
     });
 
-    this.IPCService.sendMessage('file/edit', {
+    this.IPCService.sendMessage('files/edit', {
       path: filePath,
       content
     }, (event, arg) => {

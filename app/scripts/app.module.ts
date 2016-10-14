@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser'
 import { FormsModule } from '@angular/forms'
 
 import { NgReduxModule, NgRedux } from 'ng2-redux'
+import { CodemirrorModule } from 'ng2-codemirror'
 
 import { IAppState, rootReducer } from './store'
 
@@ -19,7 +20,8 @@ import { FileListComponent } from './components/file-list.component'
   imports: [
     BrowserModule,
     FormsModule,
-    NgReduxModule
+    NgReduxModule,
+    CodemirrorModule
   ],
   declarations: [
     AppComponent,
