@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.0"></a>
+# [0.1.0](https://github.com/AntJanus/omen/compare/v0.0.0...v0.1.0) (2016-10-14)
+
+
+### Features
+
+* **render:** CodeMirror implementation ([1e2e889](https://github.com/AntJanus/omen/commit/1e2e889))
+* **render:** Project set path and get path, file listeners ([a1abac5](https://github.com/AntJanus/omen/commit/a1abac5))
+
+
+
 <a name="0.0.0"></a>
 # 0.0.0 (2016-10-04)
 
