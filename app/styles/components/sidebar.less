@@ -2,6 +2,25 @@
   background-color: #efefef;
   border-right: 2px solid #aeaeae;
   padding: 1em;
+  overflow-y: auto;
+  transition: all 1s;
+
+  &.hidden {
+    margin-left: -300px;
+  }
+}
+
+.sidebar-toggle {
+  position: absolute;
+  left: 265px;
+  top: 0;
+  padding: 5px;
+  cursor: pointer;
+  transition: all 1s;
+
+  &.hidden {
+    left: 0;
+  }
 }
 
 .file-listing {

@@ -1,3 +1,6 @@
+import 'codemirror'
+import 'codemirror/mode/gfm/gfm'
+
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { FormsModule } from '@angular/forms'
@@ -15,6 +18,7 @@ import { IPCService } from './services/IPC.service'
 import { AppComponent } from './app.component'
 import { ContentEditorComponent } from './components/content-editor.component'
 import { FileListComponent } from './components/file-list.component'
+import { SidebarComponent } from './components/sidebar.component'
 
 @NgModule({
   imports: [
@@ -26,7 +30,8 @@ import { FileListComponent } from './components/file-list.component'
   declarations: [
     AppComponent,
     ContentEditorComponent,
-    FileListComponent
+    FileListComponent,
+    SidebarComponent
   ],
   providers: [
     IPCService,

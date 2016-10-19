@@ -14,7 +14,9 @@ export class ContentEditorComponent {
   file: IFile
 
   editorConfig: any = {
-    mode: 'markdown',
+    mode: {
+      name: 'gfm'
+    },
     lineWrapping: true,
     autofocus: true
   }
@@ -22,7 +24,6 @@ export class ContentEditorComponent {
   constructor(
     private fileActions: FileActions
   ) {
-    console.log(this.editorConfig);
   }
 
   saveFile(file) {

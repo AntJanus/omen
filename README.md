@@ -17,3 +17,6 @@ Roadmap for the foreesable future:
 - [ ] "open folder" native method
 - [ ] quick search
 - [ ] keyboard shortcuts
+- [ ] Electron packaging
+- [ ] 
+
