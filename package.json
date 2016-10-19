@@ -1,7 +1,7 @@
 {
   "name": "open-markdown-environment-notebook",
   "description": "Desktop markdown editor meant for heavy-duty writing",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "main.js",
   "scripts": {
     "build": "webpack",

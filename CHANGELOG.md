@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.2.0"></a>
+# [0.2.0](https://github.com/AntJanus/omen/compare/v0.1.0...v0.2.0) (2016-10-19)
+
+
+### Features
+
+* **browser:** CodeMirror implementation ([efac855](https://github.com/AntJanus/omen/commit/efac855))
+* **version:** Standard-version and commitizen implementation ([7541885](https://github.com/AntJanus/omen/commit/7541885))
+
+
+
 <a name="0.1.0"></a>
 # [0.1.0](https://github.com/AntJanus/omen/compare/v0.0.0...v0.1.0) (2016-10-14)
 
