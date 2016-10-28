@@ -15,6 +15,7 @@ Promise.promisifyAll(fs)
 ipcMain.on('req:files', getFiles)
 ipcMain.on('req:files/get', getFile)
 ipcMain.on('req:files/edit', editFile)
+ipcMain.on('req:files/create', createFile)
 
 function getFiles (event, arg) {
   fs.readdirAsync(process.cwd())
@@ -66,6 +67,22 @@ function editFile (event, arg) {
     .then(() => {
       event.sender.send('res:files/edit', {
         id: arg.path
+      })
+    })
+}
+
+function createFile (event, arg) {
+  var filePath = path.join(process.cwd(), arg)
+  fs.writeFileAsync(filePath, '')
+    .then(() => {
+      event.sender.send('res:files/create', {
+        id: arg,
+        data: {
+          name: arg,
+          title: arg,
+          path: arg,
+          isFile: true
+        }
       })
     })
 }

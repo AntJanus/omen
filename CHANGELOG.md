@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Features
 
-* **browser:** CodeMirror implementation ([efac855](https://github.com/AntJanus/omen/commit/efac855))
+* **browser:** CodeMirror highlighting implementation ([efac855](https://github.com/AntJanus/omen/commit/efac855))
 * **version:** Standard-version and commitizen implementation ([7541885](https://github.com/AntJanus/omen/commit/7541885))
 
 

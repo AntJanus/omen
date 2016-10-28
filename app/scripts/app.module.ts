@@ -1,5 +1,6 @@
 import 'codemirror'
 import 'codemirror/mode/gfm/gfm'
+import 'codemirror/addon/display/placeholder'
 
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
@@ -19,6 +20,7 @@ import { AppComponent } from './app.component'
 import { ContentEditorComponent } from './components/content-editor.component'
 import { FileListComponent } from './components/file-list.component'
 import { SidebarComponent } from './components/sidebar.component'
+import { WordCountComponent } from './components/word-count.component'
 
 @NgModule({
   imports: [
@@ -31,7 +33,8 @@ import { SidebarComponent } from './components/sidebar.component'
     AppComponent,
     ContentEditorComponent,
     FileListComponent,
-    SidebarComponent
+    SidebarComponent,
+    WordCountComponent
   ],
   providers: [
     IPCService,

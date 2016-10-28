@@ -20,6 +20,9 @@ export class FileActions {
   static SAVING_CURRENT_FILE: string = 'SAVING_CURRENT_FILE'
   static SAVED_CURRENT_FILE: string = 'SAVED_CURRENT_FILE'
 
+  static RECEIVE_NEW_FILE: string = 'RECEIVE_NEW_FILE'
+  static RECEIVE_DIR_FILES: string = 'RECEIVE_DIR_FILES'
+
   static receiveAllFiles (files: any): IAction {
     return {
       type: FileActions.RECEIVE_ROOT_FILES,
@@ -34,6 +37,32 @@ export class FileActions {
       this.ngRedux.dispatch(FileActions.receiveAllFiles(arg.data))
 
       return true
+    })
+  }
+
+  getDirFiles (dirName): void {
+    this.IPCService.sendMessage('files/dir', dirName, (event, arg) => {
+      if (arg.id === dirName) {
+        this.ngRedux.dispatch({
+          type: FileActions.RECEIVE_DIR_FILES,
+          payload: {
+            files: arg.data
+          }
+        })
+      }
+    })
+  }
+
+  createFile (filePath: string): void {
+    this.IPCService.sendMessage('files/create', filePath, (event, arg) => {
+      if (arg.id === filePath) {
+        this.ngRedux.dispatch({
+          type: FileActions.RECEIVE_NEW_FILE,
+          payload: arg
+        })
+
+        return true
+      }
     })
   }
 

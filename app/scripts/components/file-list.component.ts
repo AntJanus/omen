@@ -57,7 +57,8 @@ export class FileListComponent implements OnInit {
   }
 
   createFile(file: IFile): void {
-    this.files.push(file)
+    console.log(file, 'file?')
+    this.fileActions.createFile(file.title)
 
     this.newFile = {
       title: '',

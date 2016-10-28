@@ -13,12 +13,17 @@ export class ContentEditorComponent {
   @Input()
   file: IFile
 
+  content = ''
+
   editorConfig: any = {
     mode: {
       name: 'gfm'
     },
     lineWrapping: true,
-    autofocus: true
+    scrollbarStyle: "null",
+    falttenSpans: true,
+    viewportMargin: 50,
+    placeholder: '-->Start here...'
   }
 
   constructor(

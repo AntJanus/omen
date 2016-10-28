@@ -32,6 +32,10 @@ export function fileReducer (state = defaultState, action) {
       return Object.assign({}, state, {
         savingCurrentFile: false
       })
+    case FileActions.RECEIVE_NEW_FILE:
+      return Object.assign({}, state, {
+        files: [...state.files, action.payload.data]
+      })
     default:
       return state
   }
