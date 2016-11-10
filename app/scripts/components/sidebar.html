@@ -6,5 +6,8 @@
 <a class="sidebar-toggle"
   [class.hidden]="hidden"
   (click)="toggleSidebar()">
-  <span class="fa fa-caret-left"></span>
+  <span
+  class="fa"
+  [class.fa-caret-left]="!hidden"
+  [class.fa-caret-right]="hidden"></span>
 </a>
