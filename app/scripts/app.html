@@ -1,5 +1,6 @@
 <div class="flex-container container">
   <sidebar></sidebar>
+  {{ currentFile | async | json }}
   <div class="flex-col">
     <content-editor [file]="currentFile | async"></content-editor>
   </div>

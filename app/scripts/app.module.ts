@@ -26,7 +26,7 @@ import { WordCountComponent } from './components/word-count.component'
   imports: [
     BrowserModule,
     FormsModule,
-    NgReduxModule,
+    NgReduxModule.forRoot(),
     CodemirrorModule
   ],
   declarations: [
