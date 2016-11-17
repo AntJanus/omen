@@ -9,7 +9,7 @@ import { IAppState } from './store'
   templateUrl: 'scripts/app.html'
 })
 export class AppComponent {
-  @select(['files', 'currentFile']) currentFile: Observable<any>
+  @select(['files', 'currentFile']) currentFile
 
   constructor(private ngRedux: NgRedux<IAppState>) {}
 }
