@@ -2,8 +2,10 @@ machine:
     node:
         version: 6.5.0
 
-test:
+dependencies:
     post:
-        - git checkout master; git pull origin master
-        - npm run release
-        - git push --follow-tags origin master
+        - npm run build
+
+test:
+    override:
+        - npm run build
