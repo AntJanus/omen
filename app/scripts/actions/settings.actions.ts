@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Injectable, NgZone } from '@angular/core'
 import { NgRedux } from 'ng2-redux'
 import { IAppState } from '../store'
 
@@ -11,14 +11,15 @@ export class SettingsActions {
   constructor (
     private ngRedux: NgRedux<IAppState>,
     private IPCService: IPCService,
-    private fileActions: FileActions) {}
+    private fileActions: FileActions,
+    private ngZone: NgZone) {}
 
   static SET_PATH: string = 'SET_PATH'
   static GET_PATH: string = 'GET_PATH'
 
   setPath (path): void {
     this.IPCService.sendMessage('path/set', { path }, (event, arg) => {
-      this.ngRedux.dispatch({
+      this.zoneDispatch({
         type: SettingsActions.SET_PATH,
         payload: {
           path
@@ -33,12 +34,22 @@ export class SettingsActions {
 
   getPath (): void {
     this.IPCService.sendMessage('path', '', (event, arg) => {
-      this.ngRedux.dispatch({
+      this.zoneDispatch({
         type: SettingsActions.GET_PATH,
         payload: {
           path: arg.path
         }
       })
     })
+  }
+
+  private zoneDispatch(action) {
+    console.log('Am I in the Angular Zone?', NgZone.isInAngularZone(), action.type);
+    if (!NgZone.isInAngularZone()) {
+      this.ngZone.run(() => this.ngRedux.dispatch(action));
+    }
+    else {
+      this.ngRedux.dispatch(action);
+    }
   }
 }
