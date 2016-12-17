@@ -14,7 +14,6 @@ export class WordCountComponent {
   constructor() {}
 
   countWords(content) {
-    console.log('this', content)
     var plainText = removeMd(content)
 
     return plainText.split(/[^\s]+/).length - 1

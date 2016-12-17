@@ -1,4 +1,5 @@
 var path = require('path')
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = {
   sourceMap: true,
@@ -22,5 +23,6 @@ module.exports = {
       }
     ],
     noParse: [/zone\.js\/dist\/.+/, /angular2\/bundles\/.+/]
-  }
+  },
+  plugins: [new BundleAnalyzerPlugin()]
 }
