@@ -2,14 +2,16 @@
 
 [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
+![screenshot](screenshot.png)
+
 ## Roadmap
 Roadmap for the foreesable future:
 
 **MVP**
 
-- [ ] Save files
+- [X] Save files
 - [ ] Open subfolders
-- [ ] CodeMirror editor
+- [X] CodeMirror editor
 
 **Afterward**
 
@@ -17,6 +19,5 @@ Roadmap for the foreesable future:
 - [ ] "open folder" native method
 - [ ] quick search
 - [ ] keyboard shortcuts
-- [ ] Electron packaging
-- [ ] 
+- [ ] Electron packaging 
 
