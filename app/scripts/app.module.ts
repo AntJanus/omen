@@ -6,7 +6,7 @@ import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { FormsModule } from '@angular/forms'
 
-import { NgReduxModule, NgRedux } from 'ng2-redux'
+import { NgReduxModule, NgRedux } from '@angular-redux/store'
 import { CodemirrorModule } from 'ng2-codemirror'
 
 import { IAppState, rootReducer } from './store'
@@ -26,7 +26,7 @@ import { WordCountComponent } from './components/word-count.component'
   imports: [
     BrowserModule,
     FormsModule,
-    NgReduxModule.forRoot(),
+    NgReduxModule,
     CodemirrorModule
   ],
   declarations: [
