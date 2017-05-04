@@ -26,14 +26,14 @@ export class SettingsActions {
         }
       })
 
-      this.fileActions.getAllFiles();
+      this.fileActions.getRootFiles();
 
       return true
     })
   }
 
   getPath (): void {
-    this.IPCService.sendMessage('path', '', (event, arg) => {
+    this.IPCService.sendMessage('path', { path: '' }, (event, arg) => {
       this.zoneDispatch({
         type: SettingsActions.GET_PATH,
         payload: {

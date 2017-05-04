@@ -1,3 +1,5 @@
+import { v4 as uuid } from 'uuid'
+
 import { Injectable } from '@angular/core'
 const { ipcRenderer } = require('electron')
 
@@ -6,14 +8,16 @@ export class IPCService {
   sendMessage(channel: string, message: any, cb?: any) {
     var requestChannel = `req:${channel}`
     var responseChannel = `res:${channel}`
+    var id = uuid();
 
-    ipcRenderer.send(requestChannel, message)
+    ipcRenderer.send(requestChannel, Object.assign({}, message, { id }))
 
     // one-time callback that self-removes
     if (cb) {
-      const cbFilter = (event, arg) => {
+      const cbFilter = (event, args) => {
         //if callback successful
-        if (cb(event, arg)) {
+        if (args.id === id) {
+          cb(event, args);
           this.removeListener(responseChannel, cbFilter)
         }
 
@@ -24,10 +28,7 @@ export class IPCService {
   }
 
   addListener(channel: string, callback: any) {
-    ipcRenderer.on(channel, (event, arg) => {
-      console.log(`IPC EVENT for ${channel}`, event, arg)
-      return callback(event, arg)
-    })
+    ipcRenderer.on(channel, callback)
   }
 
   removeListener(channel, callback) {

@@ -1,13 +1,13 @@
 import { Component, Input } from '@angular/core'
 
-import { IFile } from '../store/file.reducer'
-import { FileActions } from '../actions/file.actions'
-import { IAppState } from '../store'
+import { IFile } from '../../store/file.reducer'
+import { FileActions } from '../../actions/file.actions'
+import { IAppState } from '../../store'
 
 
 @Component({
   selector: 'content-editor',
-  templateUrl: 'scripts/components/content-editor.html'
+  templateUrl: 'scripts/components/content-editor/content-editor.html'
 })
 export class ContentEditorComponent {
   @Input()

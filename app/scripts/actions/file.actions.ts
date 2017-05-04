@@ -17,6 +17,7 @@ export class FileActions {
     private ngZone: NgZone) {}
 
   static RECEIVE_ROOT_FILES: string = 'RECEIVE_ROOT_FILES'
+  static RECEIVE_SUB_FILES: string = 'RECEIVE_SUB_FILES'
   static RECEIVE_CURRENT_FILE: string = 'RECEIVE_CURRENT_FILE'
   static SAVING_CURRENT_FILE: string = 'SAVING_CURRENT_FILE'
   static SAVED_CURRENT_FILE: string = 'SAVED_CURRENT_FILE'
@@ -24,7 +25,7 @@ export class FileActions {
   static RECEIVE_NEW_FILE: string = 'RECEIVE_NEW_FILE'
   static RECEIVE_DIR_FILES: string = 'RECEIVE_DIR_FILES'
 
-  static receiveAllFiles (files: any): IAction {
+  static receiveRootFiles (files: any): IAction {
     return {
       type: FileActions.RECEIVE_ROOT_FILES,
       payload: {
@@ -33,29 +34,28 @@ export class FileActions {
     }
   }
 
-  getAllFiles (): void {
-    this.IPCService.sendMessage('files', '', (event, arg) => {
-      this.zoneDispatch(FileActions.receiveAllFiles(arg.data))
+  getRootFiles (): void {
+    this.IPCService.sendMessage('files', { path: '' }, (event, arg) => {
+      this.zoneDispatch(FileActions.receiveRootFiles(arg.data))
 
       return true
     })
   }
 
-  getDirFiles (dirName): void {
-    this.IPCService.sendMessage('files/dir', dirName, (event, arg) => {
-      if (arg.id === dirName) {
-        this.zoneDispatch({
-          type: FileActions.RECEIVE_DIR_FILES,
-          payload: {
-            files: arg.data
-          }
-        })
-      }
+  getFolderFiles (dirName): void {
+    this.IPCService.sendMessage('files', { path: dirName }, (event, arg) => {
+      this.zoneDispatch({
+        type: FileActions.RECEIVE_DIR_FILES,
+        payload: {
+          files: arg.data,
+          path: dirName
+        }
+      })
     })
   }
 
   createFile (filePath: string): void {
-    this.IPCService.sendMessage('files/create', filePath, (event, arg) => {
+    this.IPCService.sendMessage('files/create', { filePath }, (event, arg) => {
       if (arg.id === filePath) {
         this.zoneDispatch({
           type: FileActions.RECEIVE_NEW_FILE,
@@ -68,15 +68,13 @@ export class FileActions {
   }
 
   getCurrentFile (filePath: string): void {
-    this.IPCService.sendMessage('files/get', filePath, (event, arg) => {
-      if (arg.id === filePath) {
-        this.zoneDispatch({
-          type: FileActions.RECEIVE_CURRENT_FILE,
-          payload: arg
-        })
+    this.IPCService.sendMessage('files/get', { path: filePath }, (event, args) => {
+      this.zoneDispatch({
+        type: FileActions.RECEIVE_CURRENT_FILE,
+        payload: args
+      })
 
-        return true
-      }
+      return true
     });
   }
 

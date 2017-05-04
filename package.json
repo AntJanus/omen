@@ -10,7 +10,8 @@
     "electron": "electron .",
     "release": "standard-version",
     "commit": "git-cz",
-    "test": ""
+    "test": "",
+    "pack": "electron-packager ./bin OMEN --all --ignore=node_modules/electron-*"
   },
   "repository": {
     "type": "git",
@@ -48,13 +49,17 @@
     "reflect-metadata": "0.1.10",
     "remove-markdown": "0.1.0",
     "rxjs": "5.2.0",
+    "uuid": "3.0.1",
     "zone.js": "0.8.5"
   },
   "devDependencies": {
     "@types/node": "7.0.10",
+    "asar": "0.13.0",
     "commitizen": "2.9.6",
     "cz-conventional-changelog": "2.0.0",
     "del": "2.2.2",
+    "electron-packager": "8.6.0",
+    "electron-reload": "1.1.0",
     "eslint-config-standard": "7.1.0",
     "eslint-plugin-promise": "3.5.0",
     "eslint-plugin-standard": "2.1.1",

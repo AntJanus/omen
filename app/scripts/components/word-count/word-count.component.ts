@@ -5,7 +5,7 @@ const removeMd = require('remove-markdown')
 
 @Component({
   selector: 'word-count',
-  templateUrl: 'scripts/components/word-count.html'
+  templateUrl: 'scripts/components/word-count/word-count.html'
 })
 export class WordCountComponent {
   @Input()

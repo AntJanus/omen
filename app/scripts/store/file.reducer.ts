@@ -5,7 +5,9 @@ export interface IFile {
   title?: string,
   path?: string,
   content?: string,
-  isFile?: boolean
+  isFile?: boolean,
+  children?: IFile[],
+  openFolder?: boolean
 }
 
 const defaultState = {
@@ -36,7 +38,47 @@ export function fileReducer (state = defaultState, action) {
       return Object.assign({}, state, {
         files: [...state.files, action.payload.data]
       })
+    case FileActions.RECEIVE_DIR_FILES:
+      var newState = receiveDirFiles(state, action)
+      return newState
     default:
       return state
   }
+}
+
+export function receiveDirFiles(state, action) {
+  var newState = Object.assign({}, state, {
+    files: assignChildren(state.files, action.payload.files, action.payload.path)
+  })
+
+  console.log('new state', newState)
+
+  return newState
+}
+
+export function parsePath(path) {
+  return path.split('/')
+}
+
+export function assignChildren(files, payload, filePath) {
+  var path = parsePath(filePath)
+  var currentPath = path.shift()
+
+  return files.map((file) => {
+    if (file.path ===  currentPath && !file.isFile) {
+      var children = !!file.children ? file.children : []
+
+      if (path.length > 0) {
+        children = assignChildren(children, payload, path.join('/'))
+      } else {
+        children = payload.files
+      }
+
+      return Object.assign({}, file, { children: [
+        ...children
+      ]})
+    }
+
+    return file
+  })
 }

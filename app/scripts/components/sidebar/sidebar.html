@@ -1,0 +1,25 @@
+<div class="sidebar"
+  [class.hidden]="hidden"
+>
+  <div class="file-list-component">
+    <input class="input-block input-transparent input-search" type="text" placeholder="Search" />
+    <hr />
+    <div class="file-listing">
+      <file-list [files]="files | async"></file-list>
+    </div>
+    <hr />
+    <div class="">
+      {{ projectPath | async }}
+      <input class="input-block input-transparent" type="text" placeholder="Project path" [(ngModel)]="newProjectPath" />
+      <input value="set" type="submit" (click)="setProjectPath(newProjectPath)" />
+    </div>
+  </div>
+</div>
+<a class="sidebar-toggle"
+  [class.hidden]="hidden"
+  (click)="toggleSidebar()">
+  <span
+  class="fa"
+  [class.fa-caret-left]="!hidden"
+  [class.fa-caret-right]="hidden"></span>
+</a>

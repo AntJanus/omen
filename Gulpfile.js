@@ -17,7 +17,7 @@ const paths = {
     src: './app/scripts/main.ts',
     dest: './dist/js',
     glob: './app/**/*.ts'
-  }
+  },
 }
 
 function fontCSS () {

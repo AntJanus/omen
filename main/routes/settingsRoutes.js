@@ -15,14 +15,14 @@ Promise.promisifyAll(fs)
 ipcMain.on('req:path', getPath)
 ipcMain.on('req:path/set', setPath)
 
-function getPath (event, arg) {
-  event.sender.send('res:path', { path: process.cwd() })
+function getPath (event, args) {
+  event.sender.send('res:path', { id: args.id, path: process.cwd() })
 }
 
-function setPath (event, arg) {
-  var p = arg.path
+function setPath (event, args) {
+  var p = args.path
 
   process.chdir(p)
 
-  event.sender.send('res:path/set', { ok: true })
+  event.sender.send('res:path/set', { id: args.id, ok: true })
 }

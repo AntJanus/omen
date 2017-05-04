@@ -17,10 +17,10 @@ import { SettingsActions } from './actions/settings.actions'
 import { IPCService } from './services/IPC.service'
 
 import { AppComponent } from './app.component'
-import { ContentEditorComponent } from './components/content-editor.component'
-import { FileListComponent } from './components/file-list.component'
-import { SidebarComponent } from './components/sidebar.component'
-import { WordCountComponent } from './components/word-count.component'
+import { ContentEditorComponent } from './components/content-editor/content-editor.component'
+import { FileListComponent } from './components/file-list/file-list.component'
+import { SidebarComponent } from './components/sidebar/sidebar.component'
+import { WordCountComponent } from './components/word-count/word-count.component'
 
 @NgModule({
   imports: [
