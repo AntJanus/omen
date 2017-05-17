@@ -1,13 +1,16 @@
 <div class="content">
   <div class="content-controls">
-    <a *ngIf="file && file.title" class="" (click)="saveFile(file)">
+    <a *ngIf="file && file.title && !file.isBinary" class="" (click)="saveFile(file)">
       <span class="fa fa-floppy-o"></span>
     </a>
   </div>
 	<div *ngIf="!file || !file.title">
 		<h2 class="content-title">Welcome to OMEN</h2>
 	</div>
-	<div class="content-editor" *ngIf="file && file.title">
+  <div *ngIf="file && file.title && file.isBinary">
+    <h2 class="content-title">File format not supported for {{ file.title }}</h2>
+  </div>
+	<div class="content-editor" *ngIf="file && file.title && !file.isBinary">
 		<h2 class="content-title">
 			{{ file.title }}
 			<!-- <input class="input-block" type="text" [(ngModel)]="file.title" /> -->

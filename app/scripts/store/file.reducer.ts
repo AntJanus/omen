@@ -64,14 +64,21 @@ export function assignChildren(files, payload, filePath) {
   var path = parsePath(filePath)
   var currentPath = path.shift()
 
+  console.log('Current', currentPath)
+  console.log('Path', path)
+  console.log('files', files)
+  console.log('payload', payload)
+  console.log('filePath', filePath)
+
   return files.map((file) => {
-    if (file.path ===  currentPath && !file.isFile) {
-      var children = !!file.children ? file.children : []
+    if (file.name ===  currentPath && !file.isFile) {
+      console.log('Made it!', file);
+      var children = file.children || []
 
       if (path.length > 0) {
         children = assignChildren(children, payload, path.join('/'))
       } else {
-        children = payload.files
+        children = payload
       }
 
       return Object.assign({}, file, { children: [

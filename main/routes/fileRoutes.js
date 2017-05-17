@@ -1,7 +1,11 @@
-var fs = require('fs')
-var path = require('path')
+const fs = require('fs')
+const path = require('path')
+
 const Promise = require('bluebird')
 const {ipcMain} = require('electron')
+
+const isbinaryfile = require('isbinaryfile')
+const isBinary = Promise.promisify(isbinaryfile)
 
 Promise.promisifyAll(fs)
 
@@ -44,6 +48,7 @@ function getFiles (event, args) {
 
 function getFile (event, args) {
   var file = {}
+  var stat = {}
 
   fs.readFileAsync(path.join(process.cwd(), args.path))
     .then((item) => {
@@ -52,14 +57,20 @@ function getFile (event, args) {
       return fs.statAsync(path.join(process.cwd(), args.path))
     })
     .then((fileStat) => {
+      stat = fileStat
+      return isBinary(file, fileStat.size)
+    })
+    .then((binary) => {
+      console.log(binary, 'is it?');
       event.sender.send('res:files/get', {
         id: args.id,
         data: {
           name: args.path,
           title: args.path,
           path: args.path,
-          content: file.toString(),
-          isFile: fileStat.isFile()
+          content: !binary ? file.toString() : '',
+          isFile: stat.isFile(),
+          isBinary: binary
         }
       })
     })
